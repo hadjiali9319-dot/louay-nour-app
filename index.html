@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6c63ff">
+<title>عالم لؤي ونور الهدى</title>
+<style>
+:root{--ink:#26324b;--purple:#6c63ff;--pink:#ff78a8;--blue:#61b8ef;--yellow:#ffd66b;--green:#65c99a;--paper:#fffdf8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(160deg,#f1f0ff,#fff7ed 55%,#effcff);color:var(--ink)}
+header{padding:25px 16px 20px;text-align:center;background:linear-gradient(120deg,#776cff,#a58bff);color:white;border-radius:0 0 30px 30px;box-shadow:0 5px 18px #5549a333}
+h1{margin:4px 0 8px;font-size:27px}header p{margin:0;font-size:15px}
+main{max-width:760px;margin:auto;padding:16px}
+.welcome{background:white;border-radius:22px;padding:16px;margin:16px 0;box-shadow:0 5px 18px #38456812;text-align:center}
+.welcome strong{color:#6c63ff}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{border:0;border-radius:22px;min-height:130px;padding:16px;color:var(--ink);font:inherit;text-align:center;box-shadow:0 5px 14px #38456812;cursor:pointer;transition:transform .15s}
+.tile:active,.action:active{transform:scale(.97)}
+.tile .emoji{display:block;font-size:38px;margin-bottom:8px}.tile b{font-size:18px}.tile small{display:block;margin-top:5px;color:#59647a}
+.purple{background:#e9e6ff}.pink{background:#ffe5ef}.blue{background:#e2f5ff}.yellow{background:#fff2c9}.green{background:#e2f8ec}.orange{background:#ffeadc}
+.panel{display:none;background:white;border-radius:22px;padding:18px;margin-top:16px;box-shadow:0 5px 18px #38456812}
+.panel.active{display:block}
+.panel h2{margin:0 0 8px;font-size:22px}
+.back{border:0;background:#f0efff;color:#5149c9;border-radius:14px;padding:10px 14px;font:inherit;font-weight:bold;margin-bottom:12px;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.card{background:#f8f8ff;border:2px solid #efedff;border-radius:17px;padding:14px;text-align:center}
+.big{font-size:42px;display:block;margin-bottom:5px}
+.action{border:0;border-radius:14px;background:var(--purple);color:white;padding:10px 14px;font:inherit;font-weight:bold;cursor:pointer;margin-top:8px}
+.action.secondary{background:#e9e6ff;color:#5149c9}
+.note{background:#fff6d9;border-radius:14px;padding:12px;line-height:1.7;margin-top:12px;font-size:14px}
+#message{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#26324b;color:white;padding:11px 16px;border-radius:15px;display:none;max-width:90%;text-align:center;box-shadow:0 4px 16px #0002}
+footer{text-align:center;color:#69738a;font-size:13px;padding:20px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+  <div style="font-size:34px">🌈 ⭐ 🧸</div>
+  <h1>عالم لؤي ونور الهدى</h1>
+  <p>نتعلّم ونلعب ونفرح معاً!</p>
+</header>
+<main>
+  <section class="welcome">
+    <div style="font-size:30px">👦🏻 👧🏻</div>
+    <p>أهلاً لؤي ونور الهدى!</p>
+    <strong>هيا نكتشف شيئاً جديداً اليوم</strong>
+    <div><button class="action" onclick="say('مرحباً لؤي! مرحباً نور الهدى! هيا نتعلم ونلعب!')">🔊 استمع إلى الترحيب</button></div>
+  </section>
+
+  <section id="home">
+    <div class="grid">
+      <button class="tile purple" onclick="show('quran')"><span class="emoji">🕌</span><b>القرآن الكريم</b><small>سور قصيرة وتلاوة</small></button>
+      <button class="tile pink" onclick="show('letters')"><span class="emoji">🔤</span><b>الحروف العربية</b><small>نسمع ونتعلّم</small></button>
+      <button class="tile blue" onclick="show('animals')"><span class="emoji">🐘</span><b>عالم الحيوانات</b><small>أسماء وأصوات</small></button>
+      <button class="tile yellow" onclick="show('numbers')"><span class="emoji">🔢</span><b>الأرقام</b><small>نعدّ معاً</small></button>
+      <button class="tile green" onclick="show('colors')"><span class="emoji">🎨</span><b>الألوان</b><small>اكتشف الألوان</small></button>
+      <button class="tile orange" onclick="show('game')"><span class="emoji">🎁</span><b>لعبة النجوم</b><small>سؤال وجائزة</small></button>
+    </div>
+  </section>
+
+  <section id="quran" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🕌 القرآن الكريم</h2>
+    <p>نتعلم أسماء السور ونستمع إلى تلاوة صحيحة بخشوع.</p>
+    <div class="cards">
+      <div class="card"><span class="big">📖</span><b>سورة الفاتحة</b><br><button class="action secondary" onclick="quranInfo()">🔊 التلاوة</button></div>
+      <div class="card"><span class="big">🌟</span><b>سورة الإخلاص</b><br><button class="action secondary" onclick="quranInfo()">🔊 التلاوة</button></div>
+      <div class="card"><span class="big">🌙</span><b>سورة الفلق</b><br><button class="action secondary" onclick="quranInfo()">🔊 التلاوة</button></div>
+      <div class="card"><span class="big">🕊️</span><b>سورة الناس</b><br><button class="action secondary" onclick="quranInfo()">🔊 التلاوة</button></div>
+    </div>
+    <div class="note">مهم: أزرار التلاوة هنا نموذج للواجهة فقط. سنضيف في الخطوة التالية تسجيلات قرآنية حقيقية وموثوقة، ولا نستخدم صوتاً اصطناعياً لتلاوة القرآن.</div>
+  </section>
+
+  <section id="letters" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🔤 الحروف العربية</h2>
+    <p>اضغط على الحرف لتسمع اسمه.</p>
+    <div class="cards" id="letterCards"></div>
+  </section>
+
+  <section id="animals" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🐾 عالم الحيوانات</h2>
+    <p>نتعرف على الحيوان ونسمع اسمه وصوته بالكلمات.</p>
+    <div class="cards" id="animalCards"></div>
+    <div class="note">الأصوات في هذه النسخة تجريبية منطوقة. سنستبدلها لاحقاً بتسجيلات حقيقية لأصوات الحيوانات.</div>
+  </section>
+
+  <section id="numbers" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🔢 هيا نعدّ!</h2><p>اضغط على الرقم واسمع اسمه.</p>
+    <div class="cards" id="numberCards"></div>
+  </section>
+
+  <section id="colors" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🎨 تعلّم الألوان</h2><p>اضغط على اللون واسمع اسمه.</p>
+    <div class="cards" id="colorCards"></div>
+  </section>
+
+  <section id="game" class="panel">
+    <button class="back" onclick="home()">↩ القائمة الرئيسية</button>
+    <h2>🎁 لعبة النجوم</h2>
+    <p id="question">ما الحيوان الذي يقول: مواء؟</p>
+    <div class="cards">
+      <button class="tile pink" onclick="answer(false)">🐶 الكلب</button>
+      <button class="tile yellow" onclick="answer(true)">🐱 القط</button>
+    </div>
+    <p id="result" aria-live="polite"></p>
+    <div style="font-size:28px" id="stars">⭐ 0</div>
+    <button class="action secondary" onclick="newQuestion()">سؤال جديد</button>
+  </section>
+</main>
+<footer>صُنع بحب لِلُؤي ونور الهدى ❤️</footer>
+<div id="message" role="status"></div>
+<script>
+const letters=[['ا','ألف'],['ب','باء'],['ت','تاء'],['ث','ثاء'],['ج','جيم'],['ح','حاء'],['خ','خاء'],['د','دال'],['ذ','ذال'],['ر','راء'],['ز','زاي'],['س','سين'],['ش','شين'],['ص','صاد'],['ض','ضاد'],['ط','طاء'],['ظ','ظاء'],['ع','عين'],['غ','غين'],['ف','فاء'],['ق','قاف'],['ك','كاف'],['ل','لام'],['م','ميم'],['ن','نون'],['ه','هاء'],['و','واو'],['ي','ياء']];
+const animals=[['🐱','القط','مواء مواء'],['🐶','الكلب','هو هو'],['🐄','البقرة','موو'],['🐑','الخروف','ماء ماء'],['🦁','الأسد','زئير الأسد'],['🐦','العصفور','تغريد العصفور']];
+const numbers=[['٠','صفر'],['١','واحد'],['٢','اثنان'],['٣','ثلاثة'],['٤','أربعة'],['٥','خمسة'],['٦','ستة'],['٧','سبعة'],['٨','ثمانية'],['٩','تسعة'],['١٠','عشرة']];
+const colors=[['🔴','أحمر'],['🔵','أزرق'],['🟡','أصفر'],['🟢','أخضر'],['🟣','بنفسجي'],['🟠','برتقالي']];
+function fill(id,items,kind){document.getElementById(id).innerHTML=items.map(x=>`<div class="card"><span class="big">${x[0]}</span><b>${x[1]}</b><br><button class="action secondary" onclick="say('${x[1]}${kind==='animal'?'، '+x[2]:''}')">🔊 استمع</button></div>`).join('')}
+fill('letterCards',letters);fill('animalCards',animals,'animal');fill('numberCards',numbers);fill('colorCards',colors);
+function say(text){if(!('speechSynthesis'in window)){toast('ميزة الصوت غير مدعومة في هذا المتصفح.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';u.rate=.78;u.pitch=1.08;speechSynthesis.speak(u)}
+function show(id){document.getElementById('home').style.display='none';document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function home(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('home').style.display='block';speechSynthesis?.cancel?.();window.scrollTo({top:0,behavior:'smooth'})}
+function toast(t){const m=document.getElementById('message');m.textContent=t;m.style.display='block';setTimeout(()=>m.style.display='none',3000)}
+function quranInfo(){toast('سنضيف تسجيل تلاوة حقيقية في الخطوة القادمة بإذن الله.')}
+let score=0;function answer(ok){const r=document.getElementById('result');if(ok){score++;r.textContent='أحسنت! إجابة صحيحة 🎉';say('أحسنت! إجابة صحيحة')}else{r.textContent='حاول مرة أخرى، أنت تستطيع!';say('حاول مرة أخرى، أنت تستطيع')}document.getElementById('stars').textContent='⭐ '+score}
+function newQuestion(){document.getElementById('question').textContent='ما الحيوان الذي يقول: مواء؟';document.getElementById('result').textContent=''}
+</script>
+</body>
+</html>
